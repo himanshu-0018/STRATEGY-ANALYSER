@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&display=swap");
+
+body { background: #0B0F19; }
+.qf-app { background: #0B0F19; color: #F9FAFB; font-family: "IBM Plex Sans", sans-serif; text-align: left; }
+.font-heading { font-family: "Outfit", sans-serif; }
+.font-mono { font-family: "JetBrains Mono", monospace; }
+.qf-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em; color: #9CA3AF; }
+.qf-card { background: #111827; border: 1px solid #1F2937; }
+.qf-drop { background: #0F1524; }
+.qf-tooltip { background: #0B0F19; border: 1px solid #1F2937; padding: 8px 10px; font-family: "JetBrains Mono", monospace; font-size: 11px; line-height: 1.6; }
+.qf-rise { animation: qfRise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes qfRise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+::selection { background: #06B6D455; }
+input[type="number"]::-webkit-inner-spin-button { opacity: 0.4; }

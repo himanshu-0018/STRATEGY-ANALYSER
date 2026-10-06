@@ -1,0 +1,154 @@
+{
+  "project_title": "QuantFolio - StrategyQuant-Style MT5 Portfolio Backtest Analyser",
+  "app_type": "dashboard",
+  "theme_strategy": {
+    "default_mode": "dark",
+    "theme_toggle_supported": true,
+    "archetype": "ARCHETYPE 4: SWISS & HIGH-CONTRAST / TACTICAL QUANTITATIVE",
+    "description": "High-density, professional quantitative trading dashboard. Deep dark obsidian background (#0B0F19) with crisp glass/card surfaces, tactical emerald greens for net profits, high-contrast ruby red for drawdowns, and precise cyan/indigo lines for combined equity curves."
+  },
+  "typography": {
+    "heading_font": "Outfit, sans-serif",
+    "body_font": "Inter, sans-serif",
+    "mono_font": "JetBrains Mono, Source Code Pro, monospace",
+    "rules": {
+      "headings": "Use uppercase tracking-wider font-semibold for section titles and metric labels (e.g. text-xs tracking-widest text-slate-400). Never exceed text-4xl for main hero title.",
+      "numbers_and_metrics": "Use font-mono for all tabular monetary figures, trade counts, percentages, and timestamp deal logs to prevent layout jitter.",
+      "hierarchy": "Hero Title: text-2xl sm:text-3xl font-bold; Section Headers: text-lg sm:text-xl font-semibold; KPI Values: text-2xl sm:text-3xl font-mono font-bold; Subtitles/Labels: text-xs uppercase tracking-widest text-muted-foreground."
+    }
+  },
+  "colors": {
+    "dark": {
+      "background": "#0B0F19",
+      "surface": "#111827",
+      "surface_border": "#1F2937",
+      "surface_hover": "#1E293B",
+      "primary": "#3B82F6",
+      "primary_foreground": "#FFFFFF",
+      "profit": "#10B981",
+      "profit_bg": "rgba(16, 185, 129, 0.1)",
+      "loss": "#EF4444",
+      "loss_bg": "rgba(239, 68, 68, 0.1)",
+      "accent_cyan": "#06B6D4",
+      "accent_indigo": "#6366F1",
+      "accent_amber": "#F59E0B",
+      "text_main": "#F9FAFB",
+      "text_muted": "#9CA3AF"
+    },
+    "light": {
+      "background": "#F8FAFC",
+      "surface": "#FFFFFF",
+      "surface_border": "#E2E8F0",
+      "surface_hover": "#F1F5F9",
+      "primary": "#2563EB",
+      "primary_foreground": "#FFFFFF",
+      "profit": "#059669",
+      "profit_bg": "rgba(5, 150, 105, 0.1)",
+      "loss": "#DC2626",
+      "loss_bg": "rgba(220, 38, 38, 0.1)",
+      "accent_cyan": "#0891B2",
+      "accent_indigo": "#4F46E5",
+      "accent_amber": "#D97706",
+      "text_main": "#0F172A",
+      "text_muted": "#64748B"
+    }
+  },
+  "layout_and_spacing": {
+    "type": "High Density Grid (Dashboard Mode B)",
+    "container_padding": "p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto",
+    "card_padding": "p-4 sm:p-5",
+    "gap_strategy": "gap-4 sm:gap-6",
+    "grid_structure": "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
+    "bento_spans": {
+      "kpi_summary": "col-span-1",
+      "equity_chart": "col-span-1 md:col-span-2 lg:col-span-4",
+      "strategy_table": "col-span-1 md:col-span-2 lg:col-span-4",
+      "monthly_matrix": "col-span-1 md:col-span-2 lg:col-span-2",
+      "worst_days": "col-span-1 md:col-span-2 lg:col-span-2"
+    }
+  },
+  "key_features_and_components": [
+    {
+      "name": "HeaderBar",
+      "description": "Sticky top bar with glassmorphic backdrop, branding logo ('QUANTFOLIO'), sample MT5 reports loader button, clear all button, export CSV report, starting deposit input, and light/dark theme toggle.",
+      "data_testid": "header-bar"
+    },
+    {
+      "name": "ReportUploaderDropzone",
+      "description": "Drag and drop zone for multiple MT5 HTML files with fallback file picker and instant pre-built sample dataset loader buttons (e.g., 'Load 4 FX Strategies Sample'). Parses MT5 HTML tables in browser using DOMParser or Regex to extract metadata and deal timestamps.",
+      "data_testid": "report-uploader-dropzone"
+    },
+    {
+      "name": "CombinedKpiGrid",
+      "description": "Grid of 5 executive metric cards: Total Combined Net Profit (with ROI %), True Chronological Max Drawdown ($ and % with peak-to-trough timestamp), Combined Profit Factor, Total Combined Deals/Trades, and Total Active Strategies count.",
+      "data_testid": "combined-kpi-grid"
+    },
+    {
+      "name": "CombinedEquityChart",
+      "description": "Recharts interactive Area/Line chart combining all enabled strategies deal-by-deal chronologically starting from user custom initial deposit. Includes drawdown underwater curve overlay, date range slider/brush, and strategy toggle comparison.",
+      "data_testid": "combined-equity-chart"
+    },
+    {
+      "name": "PerReportTable",
+      "description": "Shadcn Table displaying each uploaded MT5 backtest report: Checkbox toggle to include/exclude in portfolio, Report Name, Symbol, Period, Total Trades, Net Profit, Profit Factor, Individual Max Drawdown %, Weight Multiplier input (0.5x to 3x), and action menu (Remove/View details).",
+      "data_testid": "per-report-table"
+    },
+    {
+      "name": "MonthlyPerformanceMatrix",
+      "description": "Year-by-Month heatmap table showing profit ($ or %) for each month across combined strategies with total year summary column and best/worst month indicators.",
+      "data_testid": "monthly-performance-matrix"
+    },
+    {
+      "name": "WorstBestDaysList",
+      "description": "Detailed log of top chronological drawdown days (e.g. 10 Sept where multiple strategies hit Stop Loss simultaneously), highlighting overlapping deal timestamps and cumulative daily drawdown impact.",
+      "data_testid": "worst-best-days-list"
+    }
+  ],
+  "mt5_parser_technical_spec": {
+    "file_type": "MT5 HTML Backtest Report",
+    "parse_method": "Client-side browser parsing using DOMParser and regex matching for standard MetaTrader 5 backtest HTML structure.",
+    "extracted_fields": [
+      "Strategy/File Name",
+      "Symbol (e.g., EURUSD, XAUUSD)",
+      "Period/Timeframe (e.g., H1, M15)",
+      "Initial Deposit",
+      "Deal Table (Open/Close Time, Ticket, Type, Volume, Price, Profit, Balance)"
+    ],
+    "chronological_aggregation_algorithm": "Sort all deals across all active strategies chronologically by close time (or open time). Maintain a running balance starting from the user-defined portfolio starting balance. At each deal timestamp, compute cumulative portfolio balance = initial_balance + sum(deal_profit * strategy_weight). Peak balance is tracked dynamically to compute exact peak-to-trough True Max Drawdown in dollar and percentage terms."
+  },
+  "testing_and_data_testids": {
+    "rule": "ALL interactive components, inputs, buttons, tables, metric cards, and chart containers MUST include explicit data-testid attributes.",
+    "required_testids": [
+      "header-bar",
+      "theme-toggle-button",
+      "load-sample-data-button",
+      "clear-all-reports-button",
+      "portfolio-starting-balance-input",
+      "file-drop-area",
+      "file-input-element",
+      "kpi-card-total-profit",
+      "kpi-card-profit-factor",
+      "kpi-card-max-drawdown",
+      "kpi-card-total-trades",
+      "kpi-card-active-strategies",
+      "combined-equity-chart-container",
+      "chart-mode-toggle-group",
+      "per-report-table-container",
+      "per-report-row-[id]",
+      "report-include-checkbox-[id]",
+      "report-weight-input-[id]",
+      "monthly-matrix-container",
+      "worst-days-container"
+    ]
+  },
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Avoid this: make creative, high-density tactical quantitative frontends that feel like Bloomberg / StrategyQuant X.",
+    "Dark colors look good when used independently without muddy full-screen gradients.",
+    "Do NOT center align the main application container (.App { text-align: center; } is banned). Maintain left-aligned, crisp grid layout.",
+    "Always use modern button styles (pill-shaped or crisp rectangular with glow/active states).",
+    "Never use AI assistant emoji characters like 🤖🧠💭💡 for UI icons. Use Lucide icons like TrendingUp, ShieldAlert, BarChart3, Layers, FileText, Download, Play, Check, Crosshair.",
+    "Ensure 2-3x generous internal padding inside card components to prevent text collision with borders.",
+    "Every metric card and interactive element MUST have data-testid attributes.",
+    "Provide built-in sample MT5 reports (at least 3 realistic strategies: e.g. 'EURUSD Trend Follower H1', 'GBPUSD Breakout M15', 'XAUUSD Mean Reversion H4') with realistic deal timestamps so the dashboard is immediately populated with interactive data upon clicking 'Load Sample Data'."
+  ]
+}
