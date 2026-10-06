@@ -29,7 +29,7 @@ export const KpiGrid = ({ p, activeCount }) => {
       <Kpi testId="kpi-card-total-trades" icon={Activity} label="Total Trades" delay={180}
         value={stats.trades.toLocaleString()} sub={`${(stats.winRate * 100).toFixed(2)}% win rate · ${stats.wins} wins`} />
       <Kpi testId="kpi-card-active-strategies" icon={Layers} label="Active Reports" delay={240}
-        value={activeCount} sub={`Max DD % ${(dd.pct * 100).toFixed(2)}% (${money(dd.pctAmount)})`} />
+        value={activeCount} sub={`Deepest % DD: ${(dd.pct * 100).toFixed(2)}% (${money(dd.pctAmount)}, separate peak)`} />
     </div>
   );
 };

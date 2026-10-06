@@ -1,0 +1,23 @@
+{
+  "summary": "Frontend-only testing of Quantfolio MT5 portfolio analyser. All 13 feature acceptance criteria from the review request verified end-to-end through the public URL using Playwright. Sample loading, individual report metrics, combined KPIs, starting balance recomputation, checkbox toggle, remove and clear-all, equity + underwater charts, chart mode toggle, max DD window, monthly matrix, worst-days expansion, drag-drop file upload via hidden input, and non-MT5 error toast — all behave as specified. Observed KPI numbers match the expected values exactly: 417 trades, +$841.38, PF 1.46, Max DD -$152.96 (9.59%) with peak 2026.07.16 16:02:38 → trough 2026.08.04 11:03:40. Per-report row 0: 303 / +$876.00 / 1.56 / -$169.19 (10.21%). Row 1: 114 / -$34.62 / 0.88 / -$104.76 (10.48%). Unchecking row 1 reduces combined to row-0-alone values. Non-MT5 upload shows the expected error toast: 'No Deals table found'.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "App.js useMemo for portfolio has eslint-disable for exhaustive-deps and depends on 'reports, enabled, start' manually — fine but fragile; consider deriving active via useMemo too.",
+    "Uploader hidden file input is non-visible to is_visible() checks but functionally correct; data-testid is present and reachable via query_selector.",
+    "KPI 'Max DD %' sub-text on active-strategies card (10.92% / $144.80) uses dd.pct which differs from the headline true-max-DD $ amount (-$152.96 at 9.59%). The two numbers come from different peaks (max $ vs max %) — intentional per spec but could confuse users; a small helper label would help."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "test_credentials": "none required",
+  "seed_data_creation": "none — used bundled /samples/dynamic.html and /samples/smc.html",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "All acceptance criteria pass against the deployed preview URL. If re-running, use the Playwright approach of injecting File objects via DataTransfer into the hidden input (data-testid=file-input-element) to simulate uploads — the input is intentionally hidden under the dropzone. The MT5 parser works on UTF-16 sample HTML files out of the box."
+}
